@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be Right Back Page</title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+         html, body {
+            margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;height: 100%;
+            background-color:#e5d2ab;overflow:hidden;
+        }
+        .center {
+            display:flex;justify-content: center;align-items: center;height: 100vh;
+        }
+        img {
+            height:800px;
+        }
+        #typing {
+            display:display;border-right: 4px solid #351e1e;
+            animation: blink-caret 0.75s step-end infinite;white-space: nowrap;
+            font-size: 4rem;font-family: "Silkscreen";color:#351e1e;
+            
+        }
+        .type {
+            display:flex;flex-direction: column;position: absolute;margin-bottom:150px;
+        }
+        @keyframes blink-caret {
+            50% {
+                border-color:transparent;
+            }
+        }
+        .Insta img {
+            height:100px;
+            animation: float 1.8s ease-in-out infinite;
+            animation-delay:0.3s;
+        }
+        .Github img {
+            height:80px;
+            animation: float 2.1s ease-in-out infinite;
+            animation-delay:0.2s;
+        }
+        .Twitch img {
+            height:80px;
+            animation: float 1.5s ease-in-out infinite;
+            animation-delay:0.1s;
+        }
+        .SocialsContainer {
+            position:absolute;flex-wrap:wrap;width: 90vw;
+            justify-content: center;display:flex;align-items: center;margin-top:120px;
+            
+
+        }
+        h1,h2,h3,h4,h5,h6 {
+            font-family: "Silkscreen";font-weight:100;color:#351e1e;
+        }
+        .InstaAT{
+            margin-left:-10px
+        }
+        @keyframes float {
+            0% {transform:translateY(0);}
+            50% {transform: translateY(-10px);}
+            100% {transform: translate(0)}
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <div class="type">
+            <h1 id="typing"></h1>
+        </div>
+        <div class="SocialsContainer">
+            <div class="Twitch"><img src="images/icons8-twitch.svg" alt=""></div>
+            <div class="TwitchAT">
+                    <h2>@devmisa</h2>
+                </div>
+            <div class="Insta"><img src="images/icons8-insta-100.png" alt="insta icon"> </div>
+            <div class="InstaAT">
+                    <h2>@misamisa.png</h2>
+                </div>
+            <div class="Github"><img src="images/icons8-github-80.png" alt="github icon">
+            </div>
+            <div class="GitAT">
+                    <h2>@dev-misa</h2>
+                </div>
+        </div>
+        <img src="images/apple window (my style).png" alt="apple window">
+    </div>
+    
+</body>
+<script>
+    const text = "i'll be right back!";
+    const typingEl = document.getElementById('typing');
+    let index = 0;
+    let isDeleting = false;
+    const typingSpeed = 250;
+    const pauseAfterTyping = 1500;
+    const pauseAfterDeleting = 500;
+
+    function typeLoop(){
+        if(!isDeleting) {
+            typingEl.textContent = text.substring(0,index + 1);
+            index++;
+
+            if(index === text.length) {
+                setTimeout(()=> {
+                    isDeleting = true;
+                    typeLoop();
+                }, pauseAfterTyping);
+                return;
+            }
+        } else {
+            typingEl.textContent = text.substring(0,index - 1);
+            index--;
+
+            if(index === 0) {
+                isDeleting = false;
+                setTimeout(typeLoop, pauseAfterDeleting);
+                return;
+            }
+        }
+        setTimeout(typeLoop, typingSpeed);
+    }
+    typeLoop();
+</script>
+</html>
