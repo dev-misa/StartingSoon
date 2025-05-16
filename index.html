@@ -111,6 +111,8 @@
         if(countdown <= 0) {
             clearInterval(timer);
             countdownEl.textContent = "Stream is live!🔴";
+
+            typingEl.style.display = "none";
         }
     },1000);
 </script>
