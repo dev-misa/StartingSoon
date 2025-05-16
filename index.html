@@ -10,7 +10,7 @@
     <style>
         html, body {
             margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;height: 100%;
-            background-color:#e5d2ab;
+            background-color:#e5d2ab;overflow:hidden;
         }
         .center {
             display:flex;justify-content: center;align-items: center;height: 100vh;
@@ -30,6 +30,7 @@
         #countdown {
             font-family: "Cascadia Mono", sans-serif;font-size:10rem;
             color:#b68d6a;font-weight:bold;
+            z-index:10;
         }
         #typing {
             display:inline-block;border-right: 4px solid #3e2727;
@@ -93,5 +94,24 @@
     }
     typeLoop();
 
+    //ts for the countdown
+    let countdown = 300;
+    const countdownEl = document.getElementById("countdown");
+
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds/60).toString().padStart(2, '0');
+        const secs = (seconds % 60).toString().padStart(2, '0');
+        return '${mins}:${secs}';
+    }
+
+    countdownEl.textContent = formatTime(countdown);
+    const timer = setInterval(() => {
+        countdown--;
+        countdownEl.textContent = formatTime(countdown);
+        if(countdown <= 0) {
+            clearInterval(timer);
+            countdownEl.textContent = "Stream is live!";
+        }
+    },1000);
 </script>
 </html>
