@@ -7,6 +7,9 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cascadia+Mono:ital,wght@0,200..700;1,200..700&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
     <style>
         html, body {
             margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;height: 100%;
@@ -28,14 +31,14 @@
             display:flex;align-content: center;align-items: center;margin-top:200px;
         }
         #countdown {
-            font-family: "Cascadia Mono", sans-serif;font-size:6rem;
-            color:#b68d6a;font-weight:bold;
+            font-family: "Silkscreen", sans-serif;font-size:10rem;
+            color:#b68d6a;
             z-index:10;
         }
         #typing {
             display:inline-block;border-right: 4px solid #351e1e;
             animation: blink-caret 0.75s step-end infinite;white-space: nowrap;
-            font-size: 6rem;font-family: "Cascadia Mono";color:#351e1e
+            font-size: 6rem;font-family: "Silkscreen";color:#351e1e
         }
         .type h1 {
             font-size: 10px;
@@ -95,7 +98,7 @@
     typeLoop();
 
     //ts for the countdown
-    let countdown = 300;
+    let countdown = 10;
     const countdownEl = document.getElementById("countdown");
 
     function formatTime(seconds) {
