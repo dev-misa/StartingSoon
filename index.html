@@ -16,37 +16,82 @@
             display:flex;justify-content: center;align-items: center;height: 100vh;
         }
         .MainContainer {
-            border: 2px dotted black;
             display:flex;flex-direction: column;align-items: center;
-            padding:200px 500px 200px 500px;
+            padding:150px 500px 200px 500px;margin-bottom: 100px;
         }
-        .countdownCont,.CoffeeGif,.type{
-            border: 2px solid black;
-            padding:30px;
+        .countdownCont,.type{
+            position: absolute;margin-bottom: 200px;
         }
-        .CoffeeGif img {
+        img {
             height: 250px;
+            position: absolute;
+            display:flex;align-content: center;align-items: center;margin-top:250px;
         }
         #countdown {
             font-family: "Cascadia Mono", sans-serif;font-size:5rem;
             color:#b68d6a;font-weight:bold;
         }
+        #typing {
+            display:inline-block;border-right: 4px solid #3e2727;
+            animation: blink-caret 0.75s step-end infinite;white-space: nowrap;
+            font-size: 3.5rem;font-family: "Cascadia Mono";
+        }
+        .type h1 {
+            font-size: 10px;
+        }
+        @keyframes blink-caret {
+            50% {
+                border-color:transparent;
+            }
+        }
+      
     </style>
 </head>
 <body>
     <div class="center">
+        <div class="countdownCont" id="countdown">05:00</div>
         <div class="MainContainer">
-            <div class="countdownCont" id="countdown">05:00</div>
             <div class="type">
                 <h1 id="typing"></h1>
             </div>
-            <div class="CoffeeGif">
-                <img src="https://i.pinimg.com/originals/f0/4b/a9/f04ba908d1744c429505ac5239c35e63.gif" alt="coffee gif">
-            </div>
         </div>
+        <img src="https://i.pinimg.com/originals/f0/4b/a9/f04ba908d1744c429505ac5239c35e63.gif" alt="coffee gif">
     </div>
 </body>
 <script>
-    
+    const text = "Stream starting soon...";
+    const typingEl = document.getElementById('typing');
+    let index = 0;
+    let isDeleting = false;
+    const typingSpeed = 150;
+    const pauseAfterTyping = 1500;
+    const pauseAfterDeleting = 500;
+
+    function typeLoop(){
+        if(!isDeleting) {
+            typingEl.textContent = text.substring(0,index + 1);
+            index++;
+
+            if(index === text.length) {
+                setTimeout(()=> {
+                    isDeleting = true;
+                    typeLoop();
+                }, pauseAfterTyping);
+                return;
+            }
+        } else {
+            typingEl.textContent = text.substring(0,index - 1);
+            index--;
+
+            if(index === 0) {
+                isDeleting = false;
+                setTimeout(typeLoop, pauseAfterDeleting);
+                return;
+            }
+        }
+        setTimeout(typeLoop, typingSpeed);
+    }
+    typeLoop();
+
 </script>
 </html>
