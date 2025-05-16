@@ -1,5 +1,7 @@
 # Twitch Scene - Starting Stream Soon (5min)
 
+[go to page](https://dev-misa.github.io/StartingSoon/)
+
 <div align="center">
 <img src ="images/apple window (my style).png" height="277">
 <img src ="images/Starting soon..._).png" height="300">
