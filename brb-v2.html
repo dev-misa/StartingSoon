@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be Right Back page v2
+    </title>
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Silkscreen:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+         html, body {
+            margin:0px 0px 0px 0px;padding:0px 0px 0px 0px;height: 100%;
+            background-color:#FEFCD4;overflow:hidden;
+        }
+        .center {
+            display:flex;justify-content: center;align-items: center;height: 100vh;
+        }
+        img {
+            height:800px;
+        }
+         #countdown {
+            font-family: "Silkscreen", sans-serif;font-size:6rem;
+            color:#2A8D00;z-index:10;
+            position:absolute;
+           display:flex; flex-direction: column;margin-bottom:300px;
+        }
+        #typing {
+            display:display;border-right: 4px solid #4AB21E;
+            animation: blink-caret 0.75s step-end infinite;white-space: nowrap;
+            font-size: 4rem;font-family: "Silkscreen";color:#4AB21E;
+            
+        }
+        .type {
+            display:flex;flex-direction: column;position: absolute;margin-bottom:20px;
+        }
+        @keyframes blink-caret {
+            50% {
+                border-color:transparent;
+            }
+        }
+        .Insta img {
+            height:95px;
+            animation: float 1.8s ease-in-out infinite;
+            animation-delay:0.3s;
+            
+        }
+        .Github img {
+            height:80px;
+            animation: float 2.1s ease-in-out infinite;
+            animation-delay:0.2s;
+        }
+        .Twitch img {
+            height:80px;
+            animation: float 1.5s ease-in-out infinite;
+            animation-delay:0.1s;
+           
+    
+        }
+        .SocialsContainer {
+            position:absolute;flex-wrap:wrap;width: 120vw;
+            justify-content: center;display:flex;align-items: center;margin-top:600px;
+            gap:155px;margin-right:220px;
+            
+
+        }
+        h1,h2,h3,h4,h5,h6 {
+            font-family: "Silkscreen";font-weight:100;color:#351e1e;
+        }
+       
+        @keyframes float {
+            0% {transform:translateY(0);}
+            50% {transform: translateY(-10px);}
+            100% {transform: translate(0)}
+        }
+    </style>
+</head>
+<body>
+    <div class="center">
+        <div class="type">
+            <h1 id="typing"></h1>
+        </div>
+        <div class="SocialsContainer">
+            <div class="Twitch"><img src="images/icons8-twitch-2.svg" alt=""></div>
+            <div class="Github"><img src="images/icons8-github-3.svg" alt="github icon"></div>
+            <div class="Insta"><img src="images/icons8-instagram.svg" alt="insta icon"> </div>
+        </div>
+        <img src="images/brb-scene-v2.svg" alt="apple window">
+    </div>
+    
+</body>
+<script>
+    const text = "i'll be right back!";
+    const typingEl = document.getElementById('typing');
+    let index = 0;
+    let isDeleting = false;
+    const typingSpeed = 250;
+    const pauseAfterTyping = 1500;
+    const pauseAfterDeleting = 500;
+
+    function typeLoop(){
+        if(!isDeleting) {
+            typingEl.textContent = text.substring(0,index + 1);
+            index++;
+
+            if(index === text.length) {
+                setTimeout(()=> {
+                    isDeleting = true;
+                    typeLoop();
+                }, pauseAfterTyping);
+                return;
+            }
+        } else {
+            typingEl.textContent = text.substring(0,index - 1);
+            index--;
+
+            if(index === 0) {
+                isDeleting = false;
+                setTimeout(typeLoop, pauseAfterDeleting);
+                return;
+            }
+        }
+        setTimeout(typeLoop, typingSpeed);
+    }
+    typeLoop();
+
+    //ts for the countdown
+    let countdown = 300;
+    const countdownEl = document.getElementById("countdown");
+
+    function formatTime(seconds) {
+        const mins = Math.floor(seconds/60).toString().padStart(2, '0');
+        const secs = (seconds % 60).toString().padStart(2, '0');
+        return `${mins}:${secs}`;
+    }
+</script>
+</html>
